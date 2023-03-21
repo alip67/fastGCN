@@ -9,6 +9,8 @@ from torch.nn.parameter import Parameter
 
 from torch_geometric.nn import GCNConv
 from torch_geometric.utils import degree
+# from torch_sparse import SparseTensor, diag  as diag_sparse
+
 
 
 ######################################################################################################################### spectral_concatenation
@@ -117,7 +119,8 @@ class convGCN(Module):
             deg = eg_vectors @ u
             deg = 1./deg
             eg_vectors_T = torch.transpose(eg_vectors, 0, 1)
-            out = torch.diag(deg) @ eg_vectors @ (eg_vectors_T @ x)
+            # out = torch.diag(deg) @ eg_vectors @ (eg_vectors_T @ x)
+            out = eg_vectors @ (eg_vectors_T @ x) * deg[:,None]
             out = out @ self.weights
             if self.bias is not None:
                 out + self.bias

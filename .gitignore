@@ -1,7 +1,7 @@
 __pycache__/
 .DS_Store
 Plots/.
-datasets/.
+datasets/
 ./dic.pickle
 
 LearningFilters/eigenvectors.npy

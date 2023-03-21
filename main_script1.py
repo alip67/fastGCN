@@ -75,7 +75,7 @@ script_number = "1"
 #########################################################################################################################
 
 #dataset_name = ["Cora", "CiteSeer", "PubMed", "WikiCs", "Arxiv", "Products"] # dataset name
-dataset_name = ["PubMed"]
+dataset_name = ["Arxiv"]
 
 ######################################################################################################################### results df
 epochResults = epochPerformanceDF()  # detailed of each epoch for train and validation set, both accuracy and loss

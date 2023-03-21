@@ -270,7 +270,9 @@ def spectral_embedding(data, ncol=0, drp_first=True):
     DA = D.dot(A)
     L = DA.dot(D)
 
-    X, Y = eigsh(A=L, k=k, which='LM')
+    # X, Y = eigsh(A=L, k=k, which='LM')
+    X = torch.load('eigval_embedding_arxic.pt', map_location=torch.device('cpu'))
+    Y = torch.load('eigvec_embedding_arxic.pt', map_location=torch.device('cpu'))
     X = torch.tensor(X)
     Y = torch.tensor(Y)
 
@@ -278,17 +280,19 @@ def spectral_embedding(data, ncol=0, drp_first=True):
     X = Xs.values
     Y = Y[:, Xs.indices]
 
-    D = torch.diag(1. / torch.sqrt(deg))
+    # D = torch.diag(1. / torch.sqrt(deg))
+    D  = torch.sparse.spdiags(1/deg.sqrt(), torch.tensor([0]), (data.num_nodes, data.num_nodes))
     Y = torch.matmul(D, Y)
     Y = torch.sub(Y, torch.matmul(deg, Y) / deg.sum())
 
-    D = torch.diag(deg)
+    # D = torch.diag(deg)
+    D = torch.sparse.spdiags(deg, torch.tensor([0]), (data.num_nodes, data.num_nodes))
     for j in range(Y.size(1)):
         x = Y[:, j]
-        Y[:,j] = x/torch.sqrt(torch.matmul(torch.matmul(x, D), x))
+        Y[:,j] = x/torch.sqrt(torch.mul(torch.mul(x, deg), x))
 
     if drp_first: Y = Y[:, 1:Y.size(1)]
-    constant = torch.matmul(torch.matmul(Y[:, 0], D), Y[:,0])
+    constant = torch.matmul(torch.mul(Y[:, 0], deg), Y[:,0])
     if torch.round(constant, decimals=5) != 1:
         warnings.warn("constant condition does not hold! ")
 
