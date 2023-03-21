@@ -68,14 +68,14 @@ data_dir = "datasets"
 #plt_dir = "/home/n/na396/fastGCN/Script1/Plots/" # directory to store the plots
 #plt_dir = "D:/Niloo's Project/Plots/Script1/"
 # plt_dir = "Y:/Root/Study/PhD - All/Contributions/Paper 4 - ICML - GNN/Code/Plots/Script1/"
-plt_dir = "Plots\\Script1"
+plt_dir = "plots"
 
 
 script_number = "1"
 #########################################################################################################################
 
 #dataset_name = ["Cora", "CiteSeer", "PubMed", "WikiCs", "Arxiv", "Products"] # dataset name
-dataset_name = ["Arxiv"]
+dataset_name = ["PubMed"]
 
 ######################################################################################################################### results df
 epochResults = epochPerformanceDF()  # detailed of each epoch for train and validation set, both accuracy and loss
