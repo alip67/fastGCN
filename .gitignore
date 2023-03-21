@@ -1,7 +1,7 @@
 __pycache__/
 .DS_Store
-Plots/
-datasets/
+Plots/.
+datasets/.
 
 LearningFilters/eigenvectors.npy
 LearningFilters/eigenvalues.npy
