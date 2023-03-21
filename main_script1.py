@@ -63,12 +63,12 @@ imagetype="svg"
 #data_dir = "/home/n/na396/fastGCN/DataSets/" # directory to store the data
 #data_dir = "D:/Niloo's Project/DataSets/"
 # data_dir = "Y:/Root/Study/PhD - All/Contributions/Paper 4 - ICML - GNN/Code/DataSets/"
-data_dir = "C:\\Users\\ALIP\\Desktop\\fastGCN-main\\fastGCN-main\\datasets"
+data_dir = "datasets"
 
 #plt_dir = "/home/n/na396/fastGCN/Script1/Plots/" # directory to store the plots
 #plt_dir = "D:/Niloo's Project/Plots/Script1/"
 # plt_dir = "Y:/Root/Study/PhD - All/Contributions/Paper 4 - ICML - GNN/Code/Plots/Script1/"
-plt_dir = "C:\\Users\\ALIP\\Desktop\\fastGCN-main\\fastGCN-main\\Plots\\Script1"
+plt_dir = "Plots\\Script1"
 
 
 script_number = "1"
