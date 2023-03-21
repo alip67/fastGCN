@@ -2,7 +2,7 @@ __pycache__/
 .DS_Store
 Plots/.
 datasets/.
-dic.pickle
+./dic.pickle
 
 LearningFilters/eigenvectors.npy
 LearningFilters/eigenvalues.npy
