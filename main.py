@@ -61,6 +61,7 @@ def main():
     parser.add_argument('--script_id', help="Please give a value for gpu id")
     parser.add_argument('--model', help="Please give a value for model name")
     parser.add_argument('--dataset', help="Please give a value for dataset name")
+    parser.add_argument('--use_cache', help="Please give a value for dataset name")
     parser.add_argument('--data_dir', help="Please give a value for data_dir")
     parser.add_argument('--plt_dir', help="Please give a value for out_dir")
     parser.add_argument('--seed', help="Please give a value for seed")
@@ -126,6 +127,10 @@ def main():
         DATASET_NAME = args.dataset
     else:
         DATASET_NAME = config['dataset']
+    if args.use_cache is not None:
+        use_cache = args.use_cache
+    else:
+        use_cache = config['use_cache']
 
     if not os.path.exists(plt_dir):
         os.makedirs(plt_dir)
@@ -156,7 +161,7 @@ def main():
 
     graph = data_prepare(DATASET_NAME, maskInd=params['maskInd'], data_dir=data_dir)
 
-    graph = spectral_embedding(data=graph, ncol=2*graph.num_classes, drp_first=True)
+    graph = spectral_embedding(data=graph,dataset_name = DATASET_NAME, ncol=2*graph.num_classes, drp_first=True, use_cache = use_cache)
     graph = trainValidationTest_splitPerClass(data=graph, trainVal_percent=params['trainVal_percent_perClass'],
                                                       train_percent=params['train_percent_perClass'],
                                                       train_num=params['train_num_perClass'], val_num=params['val_num_perClass'],

@@ -255,7 +255,7 @@ def data_cleaning(data, maskInd=None):
     return data
 
 ######################################################################################################################### def spectral_embedding
-def spectral_embedding(data, ncol=0, drp_first=True):
+def spectral_embedding(data,dataset_name, ncol=0, drp_first=True, use_cache = False):
 
     # calculates spectral embedding
     # data: graph
@@ -270,9 +270,14 @@ def spectral_embedding(data, ncol=0, drp_first=True):
     DA = D.dot(A)
     L = DA.dot(D)
 
-    X, Y = eigsh(A=L, k=k, which='LM')
-    # X = torch.load('eigval_embedding_arxic.pt', map_location=torch.device('cpu'))
-    # Y = torch.load('eigvec_embedding_arxic.pt', map_location=torch.device('cpu'))
+    if use_cache:
+        X = torch.load(f'cache/eigval_embedding_{dataset_name}.pt', map_location=torch.device('cpu'))
+        Y = torch.load(f'cache/eigvec_embedding_{dataset_name}.pt', map_location=torch.device('cpu'))
+    else:
+        X, Y = eigsh(A=L, k=k, which='LM')
+        torch.save(X,f'cache/eigval_embedding_{dataset_name}.pt')
+        torch.save(Y, f'cache/eigvec_embedding_{dataset_name}.pt')
+
     X = torch.tensor(X)
     Y = torch.tensor(Y)
 

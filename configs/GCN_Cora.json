@@ -8,6 +8,7 @@
     
     "model": "GCN",
     "dataset": "Cora",
+    "use_cache": true,
 
     "data_dir" : "datasets",
     
