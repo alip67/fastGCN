@@ -13,6 +13,7 @@ import os
 import scipy.io
 import shutil
 import matplotlib.pyplot as plt
+import random
 
 import matplotlib
 import matplotlib.pyplot as plt
@@ -54,10 +55,8 @@ def main():
     """
         USER CONTROLS
     """
-    
-    
     parser = argparse.ArgumentParser()
-    parser.add_argument('--config', default='configs/GCN_cora.json' ,help="Please give a config.json file with training/model/data/param details")
+    parser.add_argument('--config', default='configs/GCN_Cora.json' ,help="Please give a config.json file with training/model/data/param details")
     parser.add_argument('--gpu_id', help="Please give a value for gpu id")
     parser.add_argument('--script_id', help="Please give a value for gpu id")
     parser.add_argument('--model', help="Please give a value for model name")
@@ -127,12 +126,25 @@ def main():
         DATASET_NAME = args.dataset
     else:
         DATASET_NAME = config['dataset']
+
+    if not os.path.exists(plt_dir):
+        os.makedirs(plt_dir)
     
 
     # parameters 
     params = config['params']
     # network parameters
     net_params = config['net_params']
+
+    # setting seeds
+    random.seed(params['seed'])
+    np.random.seed(params['seed'])
+    torch.manual_seed(params['seed'])
+    if device.type == 'cuda':
+        torch.cuda.manual_seed(params['seed'])
+        torch.cuda.manual_seed_all(params['seed'])
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
 
     ######################################################################################################################### results df
     epochResults = epochPerformanceDF()  # detailed of each epoch for train and validation set, both accuracy and loss
@@ -184,12 +196,12 @@ def main():
     ##################################################### training phase
     print("entering training phase...\n")
     mdl, opt, epochDF = train(model=mdl, model_name=mdl_name, optimizer=opt, mask_type=params['mask_type'],
-                                num_epoch=params['num_epoch'], data=graph, keepResult=params['train_keep'], verbose=params['train_verbose'])
+                                num_epoch=params['epochs'], data=graph, keepResult=params['train_keep'], verbose=params['train_verbose'])
     t_train = time.time() - st
     plot_epoch(df=epochDF, model_name=mdl_name, data_name=graph.graph_name, graph_mode=params['graph_less'], plt_dir=plt_dir,
                col="loss", keep=params['plt_keep'], sh=params['plt_sh'], imagetype=params['imagetype'])
     plot_epoch(df=epochDF, model_name=mdl_name, data_name=graph.graph_name, graph_mode=params['graph_less'], plt_dir=plt_dir,
-               col="accuracy", keep=params['plt_keep'], sh=params['plt_sh'], imagetype=params['graph_less'])
+               col="accuracy", keep=params['plt_keep'], sh=params['plt_sh'], imagetype=params['imagetype'])
 
     epochResults = pd.concat([epochResults, epochDF], ignore_index=True)
 
