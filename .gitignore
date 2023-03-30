@@ -3,6 +3,7 @@ __pycache__/
 out/
 datasets/
 ./dic.pickle
+notinpush/
 
 LearningFilters/eigenvectors.npy
 LearningFilters/eigenvalues.npy
