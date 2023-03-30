@@ -18,7 +18,7 @@ code=main.py
 dataset=Cora
 
 python $code --dataset $dataset --gpu_id 0 --seed $seed0 --config 'configs/GCN_Cora.json' 
-python $code --dataset $dataset --gpu_id 0 --seed $seed1 --config 'configs/GCN_Cora.json' 
-python $code --dataset $dataset --gpu_id 0 --seed $seed2 --config 'configs/GCN_Cora.json' 
-python $code --dataset $dataset --gpu_id 0 --seed $seed3 --config 'configs/GCN_Cora.json' 
+# python $code --dataset $dataset --gpu_id 0 --seed $seed1 --config 'configs/GCN_Cora.json' 
+# python $code --dataset $dataset --gpu_id 0 --seed $seed2 --config 'configs/GCN_Cora.json' 
+# python $code --dataset $dataset --gpu_id 0 --seed $seed3 --config 'configs/GCN_Cora.json' 
 
