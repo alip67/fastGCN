@@ -1,0 +1,50 @@
+{
+    "gpu": {
+        "use": true,
+        "id": 0
+    },
+
+    "script_id":1,
+    
+    "model": "GCN",
+    "dataset": "Arxiv",
+    "use_cache": true,
+
+    "data_dir" : "datasets",
+    
+    "plt_dir": "out/plots/",
+    
+    "params": {
+        "seed": 41,
+        "epochs": 7,
+        "batch_size": 128,
+        "lr": 0.01,
+        "trainVal_percent_perClass": 0.01,
+        "train_percent_perClass": 0.80,
+        "train_num_perClass": "None",
+        "val_num_perClass": "None", 
+        "train_percent_allClasses": 0.01,
+        "val_percent_allClasses": 0.80,
+        "train_num_allClasses": "None",
+        "val_num_allClasses": "None",
+        "mask_type": "original", 
+        "graph_less": true,
+        "data_verobse" : true,
+        "train_verbose" : true,
+        "train_keep" : true,
+        "test_keep" : true,
+        "test_verbose" : true,
+        "plt_sh" : false,
+        "plt_keep" : true,
+        "maskInd" : 0,
+        "imagetype" : "svg"    
+    },
+    
+    "net_params": {
+        "num_linear" : 2,
+        "add_relu" : true,
+        "conv1_out" : 128,
+        "conv_bias" : true,
+        "dropout" : 0.5
+    }
+}
